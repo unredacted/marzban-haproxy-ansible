@@ -6,7 +6,7 @@
 letsencrypt_enabled: false
 
 # Cloudflare DNS configuration
-cloudflare_api_token: "{{ vault_cloudflare_api_token | default('') }}"
+letsencrypt_cloudflare_api_token: "{{ vault_letsencrypt_cloudflare_api_token | default('') }}"
 
 # Domain configuration
 letsencrypt_domain: "{{ marzban_domain | default('') }}"
@@ -19,10 +19,10 @@ letsencrypt_staging: false
 letsencrypt_acme_directory: "https://acme-v02.api.letsencrypt.org/directory"
 
 # Certbot installation
-certbot_packages:
+letsencrypt_certbot_packages:
   - certbot
   - python3-certbot-dns-cloudflare
   - python3-cloudflare
 
 # Node configuration
-is_main_node: "{{ 'marzban_main' in group_names }}"
+letsencrypt_is_main_node: "{{ 'marzban_main' in group_names }}"

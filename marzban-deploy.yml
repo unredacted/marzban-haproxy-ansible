@@ -10,7 +10,7 @@
     letsencrypt_email: "{{ vault_acme_email }}"
     letsencrypt_staging: false  # Set to true for testing
     # Cloudflare API token should be in vault
-    # vault_cloudflare_api_token: "your-cloudflare-api-token"
+    # vault_letsencrypt_cloudflare_api_token: "your-cloudflare-api-token"
   tasks:
     - name: "Import common role"
       import_role:

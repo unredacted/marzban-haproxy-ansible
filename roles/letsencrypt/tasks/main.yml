@@ -10,18 +10,18 @@
     mode: '0755'
     owner: root
     group: root
-  when: is_main_node
+  when: letsencrypt_is_main_node
   become: true
 
 - name: Check if certificates exist
   stat:
     path: "{{ marzban_system_dirs | json_query('[*].certs_dir') | first }}/{{ letsencrypt_domain }}.cert"
   register: cert_check
-  when: is_main_node
+  when: letsencrypt_is_main_node
   become: true
 
 - name: Generate SSL Certificates
-  when: is_main_node and not cert_check.stat.exists
+  when: letsencrypt_is_main_node and not cert_check.stat.exists
   block:
     - name: Create letsencrypt hooks directory
       file:
@@ -32,9 +32,9 @@
 
     - name: Install required packages
       apt:
-        name: "{{ certbot_packages }}"
+        name: "{{ letsencrypt_certbot_packages }}"
         state: present
-        update_cache: yes
+        update_cache: true
       become: true
 
     - name: Create Cloudflare credentials file
